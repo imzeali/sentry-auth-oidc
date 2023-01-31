@@ -19,7 +19,7 @@ class FetchUser(AuthView):
         data = helper.fetch_state("data")
 
         try:
-            id_token = data["id_token"]
+            id_token = data["id_token"] or data["access_token"]
         except KeyError:
             logger.error("Missing id_token in OAuth response: %s" % data)
             return helper.error(ERR_INVALID_RESPONSE)
